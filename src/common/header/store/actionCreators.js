@@ -33,8 +33,8 @@ export const getList = () => {
 		axios.get('/api/headerList.json').then((res) => {
 			const data = res.data;
 			dispatch(changeList(data.data));
-		}).catch(() => {
-			console.log('error');
+		}).catch((error) => {
+			console.log(error);
 		})
 	}
 }

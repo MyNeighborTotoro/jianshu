@@ -117,8 +117,8 @@ const mapDispatchToProps = (dispatch) => {
 		handleSwitchPage(spinIcon) {
 			let originAngle = spinIcon.style.transform.replace(/[^0-9]/ig,'');
 			if(originAngle) {
-				originAngle = parseInt(originAngle);
-			}else {
+				originAngle = parseInt(originAngle,10);
+			} else {
 				originAngle = 0;
 			}
 			spinIcon.style.transform = 'rotate(' + (originAngle+360) + 'deg)';
