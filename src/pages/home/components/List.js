@@ -1,24 +1,26 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { 
 	ListItem,
 	ListInfo,
 	ListTitle,
 	ListWrapper,
 	ListAbstract,
-	ListMeta
+	ListMeta,
+	LoadMore
 } from '../style';
 import { connect } from 'react-redux';
 import { actionCreators } from '../store';
+import { Link } from 'react-router-dom';
 
-class List extends Component {
+class List extends PureComponent {
 	render() {
-		const { listItems } = this.props;
+		const { listItems, getMoreList, articalPage } = this.props;
 		return (
 			<ListWrapper>
 				{
-					listItems.map((item)=>{
+					listItems.map((item, index)=>{
 						return (
-							<ListItem key={item.get('id')}>
+							<ListItem key={index}>
 								{	
 									(item.get('img')) && <img 
 										className='list-item-pic' 
@@ -27,7 +29,9 @@ class List extends Component {
 									/>
 								}	
 								<ListInfo className={ (item.get('img')) ? 'have-img' : '' }>
-									<ListTitle>{item.get('title')}</ListTitle>
+									<Link to="/detail/2" className="rg-link">
+										<ListTitle >{item.get('title')}</ListTitle>
+									</Link>
 									<ListAbstract>
 										{item.get('abstract')}
 									</ListAbstract>
@@ -54,6 +58,7 @@ class List extends Component {
 						)
 					})
 				}
+				<LoadMore onClick={() => {getMoreList(articalPage)} }>加载更多</LoadMore>
 			</ListWrapper>
 		)
 	}
@@ -61,11 +66,13 @@ class List extends Component {
 	componentDidMount() {
 		this.props.getListItems();
 	}
+
 }
 
 const mapState = (state) => {
 	return {
-		listItems: state.getIn(['home','listItems'])
+		listItems: state.getIn(['home','listItems']),
+		articalPage: state.getIn(['home','articalPage'])
 	}
 }
 
@@ -73,6 +80,9 @@ const mapDispatch = (dispatch) => {
 	return {
 		getListItems() {
 			dispatch(actionCreators.getListItems());
+		},
+		getMoreList(articalPage) {
+			dispatch(actionCreators.getMoreList(articalPage));
 		}
 	}
 }

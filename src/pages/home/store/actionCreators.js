@@ -30,6 +30,14 @@ const changeWriterList = (writerList) => {
 	}
 }
 
+const addMoreList = (moreList, nextPage) => {
+	return {
+		type: actionTypes.ADD_MORE_LIST,
+		moreList,
+		nextPage
+	}
+}
+
 export const getList = () => {
 	return (dispatch) => {
 		axios.get('/api/topicList.json').then((res)=>{
@@ -71,5 +79,21 @@ export const getWriterList = () => {
 		}).catch((error)=>{
 			console.log(error);
 		})
+	}
+}
+
+export const getMoreList = (articalPage) => {
+	return (dispatch) => {
+		axios.get('/api/listItems.json?page='+articalPage).then((res)=>{
+			const moreList = fromJS(res.data.data);
+			dispatch(addMoreList(moreList, articalPage + 1));
+		})
+	}
+}
+
+export const toggleShowScroll = (show) => {
+	return {
+		type: actionTypes.TOGGLE_SHOW_SCROLL,
+		show
 	}
 }

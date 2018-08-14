@@ -4,6 +4,13 @@ export const HomeWrapper = styled.div`
 	overflow: hidden;
 	width: 960px;
 	margin: 0 auto;
+	.rg-link {
+		color: black;
+		text-decoration: none;
+	}
+	.rg-link:hover {
+		border-bottom: 1px solid black;
+	}
 `;
 
 export const HomeLeft = styled.div`
@@ -91,13 +98,15 @@ export const ListInfo = styled.div`
 	}
 `;
 
-export const ListTitle = styled.a`
+export const ListTitle = styled.div`
 	cursor: pointer;
 	margin: -7px 0 4px;
 	display: inherit;
 	font-size: 18px;
 	font-weight: 700;
 	line-height: 1.5;
+	text-decoration: none;
+	color: black;
 `;
 
 export const ListAbstract = styled.p`
@@ -273,4 +282,28 @@ export const WriterItem = styled.div`
 	    box-sizing: border-box;
 	    display: block;
 	}
+`;
+
+export const LoadMore = styled.div`
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	background-color: #a5a5a5;
+	text-align: center;
+	border-radius: 20px;
+	color: #fff;
+	margin: 30px 0;
+	cursor: pointer;
+`;
+
+export const BackTop = styled.div`
+	width: 52px;
+	height: 52px;
+	position: fixed;
+	right: 50px;
+	bottom: 100px;
+	line-height: 52px;
+	text-align: center;
+	border: 1px solid #ccc;
+	cursor: pointer;
 `;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
 	RecommendWrapper,
 	RecommendItem,
@@ -7,7 +7,7 @@ import {
 import { connect } from 'react-redux';
 import { actionCreators } from '../store';
 
-class Recommend extends Component {
+class Recommend extends PureComponent {
 	render() {
 		const { recommendList } = this.props;
 		return (
