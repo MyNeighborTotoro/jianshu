@@ -10,3 +10,4 @@ export const MOUSE_ENTER = 'header/mouse_enter';
 export const MOUSE_LEAVE = 'header/mouse_leave';
 
 export const SWITCH_PAGE = 'header/switch_page';
+

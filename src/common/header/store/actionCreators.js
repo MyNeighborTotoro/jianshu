@@ -37,4 +37,5 @@ export const getList = () => {
 			console.log(error);
 		})
 	}
-}
+};
+

@@ -18,10 +18,11 @@ import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { actionCreators } from './store';
 import { Link } from 'react-router-dom';
+import { actionCreators as LoginACtionCreators } from '../../pages/login/store';
 
 class Header extends PureComponent {
 	render() {
-		const { focused, handleInputFocus, handleInputBlur, list } = this.props;
+		const { focused, handleInputFocus, handleInputBlur, list, logout } = this.props;
 		return (
 			<HeaderWrapper>
 				<Link to="/">
@@ -30,7 +31,12 @@ class Header extends PureComponent {
 				<Nav>
 					<NavItem className="left active">首页</NavItem>
 					<NavItem className="left">下载App</NavItem>
-					<NavItem className="right">登录</NavItem>
+					{
+						this.props.loginStatus ? <NavItem className="right" onClick={logout}>退出</NavItem> :
+						<Link to="/login">
+							<NavItem className="right">登录</NavItem>
+						</Link>
+					}
 					<NavItem className="right">
 						<i className="iconfont">&#xe636;</i>
 					</NavItem>
@@ -52,10 +58,12 @@ class Header extends PureComponent {
 					</SearchWrapper>
 				</Nav>
 				<Addition>
-					<Button className="writting">
-						<i className="iconfont">&#xe624;</i>
-						写文章
-					</Button>
+					<Link to="/write">
+						<Button className="writting">
+							<i className="iconfont">&#xe624;</i>
+							写文章
+						</Button>
+					</Link>
 					<Button className="reg">注册</Button>
 				</Addition>
 			</HeaderWrapper>
@@ -98,7 +106,8 @@ const mapStateToProps = (state) => {
 		focused: state.getIn(['header','focused']),
 		mouseIn: state.getIn(['header','mouseIn']),
 		list: state.getIn(['header','list']),
-		page: state.getIn(['header','page'])
+		page: state.getIn(['header','page']),
+		loginStatus: state.getIn(['login','loginStatus'])
 	}
 }
 
@@ -126,6 +135,9 @@ const mapDispatchToProps = (dispatch) => {
 			}
 			spinIcon.style.transform = 'rotate(' + (originAngle+360) + 'deg)';
 			dispatch(actionCreators.switchPage());
+		},
+		logout() {
+			dispatch(LoginACtionCreators.logout());
 		}
 	}
 }
